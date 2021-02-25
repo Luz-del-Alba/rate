@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/api/v1/evaluation")
-public class EvaluateController {
+public class EvaluationController {
 
     @GetMapping
     public Map getAll() {
