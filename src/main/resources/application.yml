@@ -9,7 +9,7 @@ spring:
   data:
     mongodb:
       host: mongo
-      database: admin
+      database: rate
       username: root
       password: password
       port: 27017
