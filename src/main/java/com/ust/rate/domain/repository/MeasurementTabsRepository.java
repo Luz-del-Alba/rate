@@ -12,7 +12,7 @@ import java.util.Map;
 public interface MeasurementTabsRepository extends ReactiveMongoRepository<MeasurementTabs, String> {
 
     @Aggregation({
-            "{ $group : { _id : $module, $coverages: { $push: $coverage } } }"
+            "{ $group : { _id : $module, details: { $push: $coverage } } }"
     })
     Flux<Map> getModulesAvailables();
 }
