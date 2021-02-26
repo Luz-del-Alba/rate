@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "/api/v1/evaluation")
-public class EvaluationController {
+@RequestMapping(path = "/api/v1/evaluate")
+public class EvaluateController {
 
     private final EvaluationService evaluationService;
 
