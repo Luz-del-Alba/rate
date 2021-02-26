@@ -2,12 +2,11 @@ package com.ust.rate.service;
 
 import com.ust.rate.domain.entity.MeasurementTabs;
 import com.ust.rate.domain.repository.MeasurementTabsRepository;
+import com.ust.rate.web.model.AvailableModulesModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
-
-import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +19,7 @@ public class MeasurementTabsService {
         return this.measurementTabsRepository.findAll();
     }
 
-    public Flux<Map> available() {
+    public Flux<AvailableModulesModel> available() {
         return this.measurementTabsRepository.getModulesAvailables();
     }
 }

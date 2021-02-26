@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 
 @Data
 public class AvailableModulesModel {
-    private String module;
-    private Range<BigDecimal> coverages;
+    private String _id;
+    private Range<BigDecimal> details;
 }

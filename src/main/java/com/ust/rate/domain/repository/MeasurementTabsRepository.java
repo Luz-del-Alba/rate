@@ -1,12 +1,11 @@
 package com.ust.rate.domain.repository;
 
 import com.ust.rate.domain.entity.MeasurementTabs;
+import com.ust.rate.web.model.AvailableModulesModel;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
-
-import java.util.Map;
 
 @Repository
 public interface MeasurementTabsRepository extends ReactiveMongoRepository<MeasurementTabs, String> {
@@ -14,5 +13,5 @@ public interface MeasurementTabsRepository extends ReactiveMongoRepository<Measu
     @Aggregation({
             "{ $group : { _id : $module, details: { $push: $coverage } } }"
     })
-    Flux<Map> getModulesAvailables();
+    Flux<AvailableModulesModel> getModulesAvailables();
 }
