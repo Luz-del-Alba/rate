@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 
+import java.util.Map;
+
 @Service
 @AllArgsConstructor
 @Transactional
@@ -18,4 +20,7 @@ public class MeasurementTabsService {
         return this.measurementTabsRepository.findAll();
     }
 
+    public Flux<Map> available() {
+        return this.measurementTabsRepository.getModulesAvailables();
+    }
 }

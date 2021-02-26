@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 public class Range<T> {
     private T min;
     private T max;
+    private String description;
 }

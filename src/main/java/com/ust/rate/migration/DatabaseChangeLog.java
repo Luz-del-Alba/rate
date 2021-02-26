@@ -39,7 +39,7 @@ public class DatabaseChangeLog implements CommandLineRunner {
                 .collect(Collectors.joining("\n"));
         val initialData = Utils.objectMapper().readValue(list, new ListMeasurementTabsTypeReference());
         val response = measurementTabsRepository.insert(initialData);
-        log.info(String.format("%s records updated.", response.count()));
+        log.info(String.format("%s records updated.", response.collectList().block().size()));
         log.info("Database initialized successfully.");
     }
 
