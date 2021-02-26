@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -33,13 +34,19 @@ public class DatabaseChangeLog implements CommandLineRunner {
     @SneakyThrows
     public void initDatabase() {
         log.info("Initializing database.");
-        InputStream inputStream = getClass().getResourceAsStream("/data/measurement-tabs.json");
-        String list = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8)).lines()
-                .collect(Collectors.joining("\n"));
-        val initialData = Utils.objectMapper().readValue(list, new ListMeasurementTabsTypeReference());
-        val response = measurementTabsRepository.insert(initialData);
-        log.info(String.format("%s records updated.", response.collectList().block().size()));
+        if (measurementTabsRepository.count().blockOptional().orElse(0L) == 0L) {
+            InputStream inputStream = getClass().getResourceAsStream("/data/measurement-tabs.json");
+            String list = new BufferedReader(
+                    new InputStreamReader(inputStream, StandardCharsets.UTF_8)).lines()
+                    .collect(Collectors.joining("\n"));
+            val initialData = Utils.objectMapper().readValue(list, new ListMeasurementTabsTypeReference());
+            Flux.fromStream(
+                    initialData.stream()
+                            .map(measurementTabsRepository::insert)
+            ).subscribe(m -> log.info("New quote loaded: {}", m.block()));
+            log.info("Repository contains now {} entries.",
+                    measurementTabsRepository.count().block());
+        }
         log.info("Database initialized successfully.");
     }
 
