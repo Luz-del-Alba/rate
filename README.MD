@@ -1,6 +1,6 @@
-Policy
+Rate
 ------------------------------------
-[![Deploy](https://github.com/Luz-del-Alba/policy/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/Luz-del-Alba/policy/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/Luz-del-Alba/rate/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/Luz-del-Alba/rate/actions/workflows/deploy.yml)
 
 This service provides the Business logic for performing the evaluation of the prospects that wants to acquire a policy.
 
